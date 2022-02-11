@@ -10,9 +10,15 @@ class Alien(Sprite):
         super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
+        self.stats = ai_game.stats
 
-        # load the alien image and set its rect attribute
-        self.image = pygame.image.load('images/alien.bmp')
+        self.colors = ['images/alien_green.bmp', 'images/alien_yellow.bmp', 'images/alien_orange.bmp',
+                       'images/alien_red.bmp']
+
+        # load the alien image based on the level and set its rect attribute
+        # TODO placeholder module while 5 levels are worked out
+        color_index = (self.stats.level - 1) % len(self.colors)
+        self.image = pygame.image.load(self.colors[color_index])
         self.rect = self.image.get_rect()
 
         # start each new alien near the top left of the screen

@@ -37,18 +37,20 @@ class AlienInvasion:
 
         # create instance to store game statistics
         self.stats = GameStats(self)
+
         # create a gameboard
         self.sb = ScoreBoard(self)
 
-        # create the ship. requires passing instance of game.
+        # create the ship.
         self.ship = Ship(self)
 
         # create sprite grouping for bullets
         self.bullets = pygame.sprite.Group()
 
-        # create alien
+        # group to hold aliens
         self.aliens = pygame.sprite.Group()
 
+        # make the fleet of aliens
         self._create_fleet()
 
         # make the play button
@@ -137,12 +139,15 @@ class AlienInvasion:
         if not self.aliens:
             # destroy existing bullets
             self.bullets.empty()
+
+            # increase level
+            self.stats.level += 1
+            
             # create new fleet
             self._create_fleet()
             self.settings.increase_speed()
 
-            # increase level
-            self.stats.level += 1
+            # display new level
             self.sb.prep_level()
 
     def _update_aliens(self):
