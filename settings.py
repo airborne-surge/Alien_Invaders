@@ -1,16 +1,19 @@
 import pygame
 
+
 class Settings:
     """Class stores settings for Alien Invasion game."""
 
-    def __init__(self):
+    def __init__(self, ai_game):
         """Initialize the game settings"""
+        self.level_backgrounds = ['images/level_02.jpg', 'images/level_03.jpg', 'images/level_04.jpg',
+                                  'images/level_05.jpg', 'images/level_01.jpg' ]
         # screen settings
         self.screen_width = 1200
         self.screen_height = 800
         self.bg_color = (0, 0, 0)
-        # # choose image to use as background
-        # self.background = 'images/space.bmp'
+        # TODO
+        self.background = 'images/level_01.jpg'
 
         # ship settings
         self.ship_speed = 1.5
@@ -24,7 +27,7 @@ class Settings:
         # TODO for testing
         self.bullet_width = 3000
         self.bullet_height = 15
-        self.bullet_color = (80,100,0)
+        self.bullet_color = (80, 100, 0)
         self.bullets_allowed = 3
 
         # alien settings
@@ -44,6 +47,9 @@ class Settings:
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
+        # TODO
+        # backgrounds change as levels progress
+
         """Initialize settings that change throughout the game"""
         self.ship_speed = 2.0
         self.bullet_speed = 4.0

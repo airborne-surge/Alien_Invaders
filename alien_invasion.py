@@ -20,12 +20,16 @@ class AlienInvasion:
     def __init__(self):
         """Initialize the game and create game resources"""
         pygame.init()
-        self.settings = Settings()
+        self.settings = Settings(self)
 
         # screen settings for 1200x800
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        # # use image for background
-        # self.background = pygame.image.load(self.settings.background)
+        # TODO
+        # use image for background
+        self.background = pygame.image.load(self.settings.background)
+        # scale the image to the game window
+        self.background = pygame.transform.scale(self.background,
+                                                 (self.settings.screen_width, self.settings.screen_height))
 
         # # screen settings for full screen TODO may be able to map button to activate full screen
         # self.screen = pygame.display.set_mode( (0, 0), pygame.FULLSCREEN )
@@ -142,7 +146,14 @@ class AlienInvasion:
 
             # increase level
             self.stats.level += 1
-            
+
+            # TODO change background image
+            background_index = (self.stats.level - 1) % len(self.settings.level_backgrounds)
+            self.background = pygame.image.load(self.settings.level_backgrounds[background_index])
+            # scale the image to the game window
+            self.background = pygame.transform.scale(self.background,
+                                                     (self.settings.screen_width, self.settings.screen_height))
+
             # create new fleet
             self._create_fleet()
             self.settings.increase_speed()
@@ -240,9 +251,10 @@ class AlienInvasion:
 
     def _update_screen(self):
         """Update images on the screen and flip to the new screen"""
-        self.screen.fill(self.settings.bg_color)
+        # self.screen.fill(self.settings.bg_color)
+        # TODO
         # # draw background image
-        # self.screen.blit(self.background,(0,0))
+        self.screen.blit(self.background, (0, 0))
         self.ship.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
